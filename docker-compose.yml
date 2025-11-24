@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/reading_list.db
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+    restart: unless-stopped
+
+  # Опциональный PostgreSQL
+  # db:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_USER: reading_list
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: reading_list
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+# volumes:
+#   postgres_data:
+
